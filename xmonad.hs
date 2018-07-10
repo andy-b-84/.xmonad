@@ -6,7 +6,6 @@ import Data.Maybe (maybe)
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Config.Gnome
-import XMonad.Config.Kde
 import XMonad.Config.Xfce
 import XMonad.Config.Azerty
 import XMonad.Hooks.SetWMName
@@ -21,7 +20,6 @@ main = do
   }
      
 desktop "gnome" = gnomeConfig
-desktop "kde" = kde4Config
 desktop "xfce" = xfceConfig
 desktop "xmonad-mate" = gnomeConfig
 desktop _ = desktopConfig
