@@ -13,7 +13,7 @@ Config {
     , overrideRedirect = True
     , commands = [ Run MultiCpu ["-t", "CPU: <total0>% <total1>% <total2>% <total3>%","-L","3","-H","50","-l","green","--normal","orange","--high","red"]   40
 		, Run Date "%a %_d %H:%M" "date" 60
-		, Run Weather "KMSN" ["-t", "<tempC>C", "-L","-3", "-H", "77", "--normal","green","--high","red","--low","lightblue"] 36000
+		, Run Weather "LFLY" ["-t", "<tempC>C", "-L","-3", "-H", "77", "--normal","green","--high","red","--low","lightblue"] 36000
         , Run Memory ["-t","Mem: <usedratio>%", "-l", "green", "--normal","orange","--high","red"] 40
         , Run CpuFreq ["-t","<cpu0>|<cpu1>|<cpu2>|<cpu3>","-L","0","-H","2","-l","lightblue","-n","#009900","-h","red"] 30
 		, Run Battery
@@ -30,5 +30,5 @@ Config {
 	]
     , sepChar = "%"
     , alignSep = "}{"
-    , template = " %StdinReader% }{ <fc=#0033ff>|</fc> %multicpu% <fc=#0033FF>|</fc> %memory% <fc=#0033FF>|</fc> %battery% <fc=#0033FF>|</fc> %date% <fc=#0033FF>|</fc> %KMSN%"
+    , template = " %StdinReader% }{ <fc=#0033ff>|</fc> %multicpu% <fc=#0033FF>|</fc> %memory% <fc=#0033FF>|</fc> %battery% <fc=#0033FF>|</fc> %date% <fc=#0033FF>|</fc> %LFLY%"
 }
