@@ -8,6 +8,7 @@ import XMonad.Config.Desktop
 import XMonad.Config.Gnome
 import XMonad.Config.Xfce
 import XMonad.Config.Azerty
+import qualified Data.Map as M
 import XMonad.Hooks.SetWMName
 
 main = do
@@ -15,9 +16,15 @@ main = do
   xmonad ( maybe desktopConfig desktop session ) { 
     terminal    = "xterm -bg black -fg lightgrey",
     modMask     = mod4Mask,
-    keys        = \c -> azertyKeys c <+> keys desktopConfig c,
+    keys        = \c -> myAzertyKeys c <+> keys desktopConfig c,
     startupHook = setWMName "LG3D"
   }
+
+myAzertyKeys x = M.union (myKeys x) (azertyKeys x)
+myKeys x = M.union (M.fromList (newKeys x)) (keys def x) 
+newKeys (XConfig {XMonad.modMask = modm}) = [
+    ((mod4Mask, xK_l), spawn "slock")
+  ]  
      
 desktop "gnome" = gnomeConfig
 desktop "xfce" = xfceConfig
