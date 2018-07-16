@@ -18,9 +18,16 @@ main = do
     terminal    = "xterm -bg black -fg lightgrey",
     modMask     = mod4Mask,
     keys        = \c -> myAzertyKeys c <+> keys desktopConfig c,
-    startupHook = setWMName "LG3D"
---    layoutHook  = noBorders Full
+    startupHook = setWMName "LG3D",
+    layoutHook  = noBorders $ layout
   }
+
+layout = tiled ||| Mirror tiled ||| Full
+  where
+    tiled   = Tall nmaster delta ratio
+    nmaster = 1
+    ratio   = 1/2
+    delta = 3/100
 
 myAzertyKeys x = M.union (myKeys x) (azertyKeys x)
 myKeys x = M.union (M.fromList (newKeys x)) (keys def x) 
