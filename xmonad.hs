@@ -10,6 +10,7 @@ import XMonad.Config.Xfce
 import XMonad.Config.Azerty
 import qualified Data.Map as M
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.NoBorders (noBorders)
 
 main = do
   session <- getEnv "DESKTOP_SESSION"
@@ -18,6 +19,7 @@ main = do
     modMask     = mod4Mask,
     keys        = \c -> myAzertyKeys c <+> keys desktopConfig c,
     startupHook = setWMName "LG3D"
+--    layoutHook  = noBorders Full
   }
 
 myAzertyKeys x = M.union (myKeys x) (azertyKeys x)
