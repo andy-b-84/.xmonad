@@ -32,7 +32,8 @@ layout = tiled ||| Mirror tiled ||| Full
 myAzertyKeys x = M.union (myKeys x) (azertyKeys x)
 myKeys x = M.union (M.fromList (newKeys x)) (keys def x) 
 newKeys (XConfig {XMonad.modMask = modm}) = [
-    ((mod4Mask, xK_l), spawn "slock")
+    ((mod4Mask, xK_l), spawn "slock"),
+    ((mod4Mask, xK_g), sendMessage Expand)
   ]  
      
 desktop "gnome" = gnomeConfig
