@@ -22,7 +22,7 @@ main = do
     layoutHook  = noBorders $ layout
   }
 
-layout = tiled ||| Full
+layout = tiled ||| Mirror tiled ||| Full
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 2
