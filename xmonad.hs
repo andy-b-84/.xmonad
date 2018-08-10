@@ -33,11 +33,17 @@ layout = tiled ||| Mirror tiled ||| Full
 myAzertyKeys x = M.union (myKeys x) (azertyKeys x)
 myKeys x = M.union (M.fromList (newKeys x)) (keys def x) 
 newKeys (XConfig {XMonad.modMask = modm}) = [
-      ((mod4Mask, xK_l            ), spawn "slock")
-    , ((mod4Mask, xK_g            ), sendMessage Expand)
-    , ((0, xF86XK_AudioMute       ), spawn "amixer set Master toggle")
-    , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master -")
-    , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master +")
+      ((mod4Mask, xK_a               ), spawn "arandr")
+    , ((mod4Mask, xK_f               ), spawn "firefox")
+    , ((mod4Mask .|. shiftMask, xK_f ), spawn "firefox -P train")
+    , ((mod4Mask, xK_g               ), sendMessage Expand)
+    , ((mod4Mask, xK_l               ), spawn "slock")
+    , ((mod4Mask, xK_s               ), spawn "spotify")
+    , ((mod4Mask, xK_t               ), spawn "terminator")
+    , ((mod4Mask .|. shiftMask, xK_t ), spawn "terminator -l recette")
+    , ((0, xF86XK_AudioMute          ), spawn "amixer set Master toggle")
+    , ((0, xF86XK_AudioLowerVolume   ), spawn "amixer -c 0 set Master 1dB-")
+    , ((0, xF86XK_AudioRaiseVolume   ), spawn "amixer -c 0 set Master 1dB+")
   ]  
      
 desktop "gnome" = gnomeConfig
