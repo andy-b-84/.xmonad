@@ -3,6 +3,8 @@
 import System.Posix.Env (getEnv)
 import Data.Maybe (maybe)
 
+import Graphics.X11.ExtraTypes.XF86
+
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Config.Gnome
@@ -11,7 +13,7 @@ import XMonad.Config.Azerty
 import qualified Data.Map as M
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders (noBorders)
-import Graphics.X11.ExtraTypes.XF86
+import XMonad.Util.Dzen
 
 main = do
   session <- getEnv "DESKTOP_SESSION"
