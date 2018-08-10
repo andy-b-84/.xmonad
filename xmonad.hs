@@ -10,10 +10,13 @@ import XMonad.Config.Desktop
 import XMonad.Config.Gnome
 import XMonad.Config.Xfce
 import XMonad.Config.Azerty
-import qualified Data.Map as M
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Util.Dzen
+
+import qualified XMonad.Layout.IndependentScreens as LIS
+
+import qualified Data.Map as M
 
 main = do
   session <- getEnv "DESKTOP_SESSION"
@@ -32,13 +35,22 @@ layout = tiled ||| Mirror tiled ||| Full
     ratio   = 1/2
     delta   = 3/100
 
+toggledisplay = do
+  screencount <- LIS.countScreens
+  if screencount > 1
+    then spawn "xrandr --output DP-3-1 --off"
+    else spawn "xrandr --output DP-3-1 --top-of eDP-1"
+
 myAzertyKeys x = M.union (myKeys x) (azertyKeys x)
 myKeys x = M.union (M.fromList (newKeys x)) (keys def x) 
 newKeys (XConfig {XMonad.modMask = modm}) = [
       ((mod4Mask, xK_a               ), spawn "arandr")
+    , ((mod4Mask, xK_c               ), spawn "code")
+    , ((mod4Mask, xK_d               ), toggledisplay)
     , ((mod4Mask, xK_f               ), spawn "firefox")
     , ((mod4Mask .|. shiftMask, xK_f ), spawn "firefox -P train")
     , ((mod4Mask, xK_g               ), sendMessage Expand)
+    , ((mod4Mask, xK_i               ), spawn "idea")
     , ((mod4Mask, xK_l               ), spawn "slock")
     , ((mod4Mask, xK_s               ), spawn "spotify")
     , ((mod4Mask, xK_t               ), spawn "terminator")
