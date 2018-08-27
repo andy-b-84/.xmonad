@@ -21,7 +21,7 @@ import qualified Data.Map as M
 main = do
   session <- getEnv "DESKTOP_SESSION"
   xmonad ( maybe desktopConfig desktop session ) { 
-    terminal    = "xterm -bg black -fg lightgrey",
+    terminal    = "urxvt -bg black -fg lightgrey",
     modMask     = mod4Mask,
     keys        = \c -> myAzertyKeys c <+> keys desktopConfig c,
     startupHook = setWMName "LG3D",
@@ -51,9 +51,9 @@ newKeys (XConfig {XMonad.modMask = modm}) = [
     , ((mod4Mask, xK_g               ), sendMessage Expand)
     , ((mod4Mask, xK_i               ), spawn "idea")
     , ((mod4Mask, xK_l               ), spawn "slock")
+    , ((mod4Mask, xK_o               ), spawn "terminator")
+    , ((mod4Mask .|. shiftMask, xK_o ), spawn "terminator -l recette")
     , ((mod4Mask, xK_s               ), spawn "spotify")
-    , ((mod4Mask, xK_t               ), spawn "terminator")
-    , ((mod4Mask .|. shiftMask, xK_t ), spawn "terminator -l recette")
     , ((0, xF86XK_Display            ), toggledisplay)
     , ((0, xF86XK_AudioMute          ), spawn "amixer set Master toggle")
     , ((0, xF86XK_AudioLowerVolume   ), spawn "amixer -c 0 set Master 1dB-")
