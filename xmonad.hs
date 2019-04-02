@@ -11,21 +11,23 @@ import XMonad.Config.Gnome
 import XMonad.Config.Xfce
 import XMonad.Config.Azerty
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.ManageDocks
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Util.Dzen
 
 import qualified XMonad.Layout.IndependentScreens as LIS
-
 import qualified Data.Map as M
+-- import qualified XMonad.Util.Brightness as B
 
 main = do
   session <- getEnv "DESKTOP_SESSION"
   xmonad ( maybe desktopConfig desktop session ) { 
     terminal    = "urxvt -bg black -fg lightgrey",
+    manageHook  = manageDocks <+> manageHook desktopConfig,
     modMask     = mod4Mask,
     keys        = \c -> myAzertyKeys c <+> keys desktopConfig c,
     startupHook = setWMName "LG3D",
-    layoutHook  = noBorders $ layout
+    layoutHook  = avoidStruts $ noBorders $ layout
   }
 
 layout = tiled ||| Mirror tiled ||| Full
@@ -58,6 +60,8 @@ newKeys (XConfig {XMonad.modMask = modm}) = [
     , ((0, xF86XK_AudioMute          ), spawn "amixer set Master toggle")
     , ((0, xF86XK_AudioLowerVolume   ), spawn "amixer -c 0 set Master 1dB-")
     , ((0, xF86XK_AudioRaiseVolume   ), spawn "amixer -c 0 set Master 1dB+")
+--    , ((0, xF86XK_MonBrightnessUp    ), B.increase)
+--    , ((0, xF86XK_MonBrightnessDown  ), B.decrease)
   ]  
      
 desktop "gnome" = gnomeConfig
